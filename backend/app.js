@@ -7,19 +7,20 @@ const app = express();
 
 /* ─── CORS Configuration ─── */
 const allowedOrigins = [
-  'http://localhost:5173',          // Vite dev server
-  'http://localhost:3000',          // Alternative dev port
-  process.env.FRONTEND_URL,        // Production frontend (Vercel)
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://payment-gateway-js-git-main-chandraathithyams-projects.vercel.app',
+  process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (Postman, curl, server-to-server)
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+      console.warn(`⚠️ CORS blocked for origin: ${origin}`);
       return callback(new Error('Not allowed by CORS'));
     },
     methods: ['GET', 'POST'],

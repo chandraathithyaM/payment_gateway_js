@@ -37,11 +37,12 @@ Follow these steps to deploy PayFlow to production using Render and Vercel.
    - `VITE_RAZORPAY_KEY_ID`: Your Razorpay Key ID.
 7. Click **Deploy**.
 
-## 4. Final Configuration
+## 4. Final Configuration & CORS
 
 1. After Vercel deployment, copy your frontend URL (e.g., `https://payflow-frontend.vercel.app`).
 2. Go back to Render, find your Backend Web Service, and update the `FRONTEND_URL` environment variable with your Vercel URL.
-3. Restart the backend service to apply CORS changes.
+3. **CRITICAL**: If you are using Vercel Preview or Branch deployments, you must add those specific URLs to the `allowedOrigins` array in `backend/app.js` or configure the CORS middleware to allow them.
+4. Restart the backend service on Render to apply environment variable and code changes.
 
 ## 🔒 Security Best Practices
 
